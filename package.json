@@ -9,6 +9,7 @@
     "deploy": "vercel --prod"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.2.1",
     "@types/three": "^0.139.0",
     "@types/webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.4.6.tgz",
     "parcel-bundler": "^1.6.1",

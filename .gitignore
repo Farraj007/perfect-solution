@@ -2,7 +2,6 @@
 dist/
 node_modules/
 photos/*.glb
-assets/office_chair.glb
 photos/*.*
 photos/ 
 photos
