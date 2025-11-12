@@ -61,7 +61,7 @@ const furnitureConfigs: Record<number, FurnitureConfig> = {
         seatNames: ['Object_3']
     },
     2: {
-        path: "./assets/perfect_solution_chair_executive.glb",
+        path: "./assets/private_solutions_chair_executive.glb",
         rootName: "Sketchfab_model",
         frameNames: [
             'Plane.002_Material.011_0',
@@ -102,12 +102,13 @@ const translations: Record<SupportedLang, Record<string, string>> = {
         'hero.pill3': 'Bespoke kitchens',
         'cta.whatsapp': 'WhatsApp us',
         'cta.call': 'Call +962 7 9702 0156',
+        'cta.customize': 'Start now',
         'section2.h2': 'engineered to last',
         'section2.h1': 'Work<br>Better',
         'section2.p': 'We mill, assemble, and finish every element in-house: acoustic walls, wood offices, concierge desks, and custom kitchens that age gracefully under years of use.',
         'section3.h2': 'configure your',
         'section3.h1': 'Signature pieces',
-        'section3.p': 'Switch upholstery tones, blend metal finishes, or swap the featured model. The Perfect Solution factory is ready for your boardroom and your kitchen suite.',
+        'section3.p': 'Switch upholstery tones, blend metal finishes, or swap the featured model. The Private Solutions factory is ready for your boardroom and your kitchen suite.',
         'form.name': 'Name',
         'form.phone': 'Phone',
         'form.message': 'Message',
@@ -117,7 +118,7 @@ const translations: Record<SupportedLang, Record<string, string>> = {
         'gallery.lobby': 'Lobby signage',
         'gallery.showroom': 'Showroom',
         'showroom.title': 'Showroom gallery',
-        'showroom.subtitle': 'Explore recent Perfect Solution builds.',
+        'showroom.subtitle': 'Explore recent Private Solutions builds.',
         'showroom.tab.chairs': 'Chairs',
         'showroom.tab.offices': 'Offices',
         'showroom.tab.kitchens': 'Kitchens',
@@ -137,6 +138,7 @@ const translations: Record<SupportedLang, Record<string, string>> = {
         'hero.pill3': 'مطابخ حسب الطلب',
         'cta.whatsapp': 'تواصل عبر واتساب',
         'cta.call': 'اتصل على ‎+962 7 9702 0156',
+        'cta.customize': 'ابدأ الآن',
         'section2.h2': 'مصممة لتدوم',
         'section2.h1': 'اعمل<br>بإتقان',
         'section2.p': 'نقوم بالتصنيع والتجميع والتشطيب داخل مصنعنا لكل عنصر من الجدران الصوتية إلى المكاتب والمطابخ التي تحافظ على جمالها لسنوات.',
@@ -152,7 +154,7 @@ const translations: Record<SupportedLang, Record<string, string>> = {
         'gallery.lobby': 'لافتة الاستقبال',
         'gallery.showroom': 'صالة العرض',
         'showroom.title': 'معرض الأعمال',
-        'showroom.subtitle': 'استكشف أحدث مشاريع بيرفكت سوليوشن.',
+        'showroom.subtitle': 'استكشف أحدث مشاريع برايفت سوليوشن.',
         'showroom.tab.chairs': 'كراسي',
         'showroom.tab.offices': 'مكاتب',
         'showroom.tab.kitchens': 'مطابخ',
@@ -402,7 +404,7 @@ async function setupViewer(){
         .fromTo(position, {x: isMobile ? 3 : 3, y: isMobile ? -0.8 : -0.8, z: isMobile ? 1.2 : 1.2}, {x: isMobile ? 1.28 : 1.28, y: isMobile ? -1.7 : -1.7, z: isMobile ? 5.86 : 5.86, duration: 4, onUpdate}, '-=0.8')
         .fromTo(target, {x: isMobile ? 2.5 : 2.5, y: isMobile ? -0.07 : -0.07, z: isMobile ? -0.1 : -0.1}, {x: isMobile ? -0.21 : 0.91, y: isMobile ? 0.03 : 0.03, z: isMobile ? -0.25 : -0.25, duration: 4, onUpdate}, '-=4')
         .fromTo('.header--container', {opacity: 0, y: '-100%'}, {opacity: 1, y: '0%', ease: "power1.inOut", duration: 0.8}, '-=1')
-        .fromTo('.hero--scroller', {opacity: 0, y: '150%'}, {opacity: 1, y: '0%', ease: "power4.inOut", duration: 1}, '-=1')
+        .fromTo('.scroll-indicator', {opacity: 0, y: '50px'}, {opacity: 1, y: '0px', ease: "power4.inOut", duration: 1}, '-=1')
         .fromTo('.hero--container', {opacity: 0, x: '100%'}, {opacity: 1, x: '0%', ease: "power4.inOut", duration: 1.8, onComplete: setupScrollAnimation}, '-=1')
         .fromTo('.side-bar', { opacity: 0, x: '50%' }, { opacity: 1, x: '0%', ease: "power4.inOut", duration: 2 }, '-=1')
         .to('.side-bar .unique', { opacity: 1, scale: 1.5, ease: "power4.inOut", duration: 2}, '-=1')
@@ -440,8 +442,8 @@ async function setupViewer(){
                     seatMeshes.forEach(mesh => mesh.material.color.lerpColors(seatStart, seatEnd, colorLerpValue.x))
                 }
         }})
-        .to('.hero--scroller', {opacity: 0, y: '150%',
-            scrollTrigger: { trigger: ".cam-view-2", start: "top bottom", end: "top center", scrub: 1, immediateRender: false, pin: '.hero--scroller--container'
+        .to('.scroll-indicator', {opacity: 0, y: '50px',
+            scrollTrigger: { trigger: ".cam-view-2", start: "top bottom", end: "top center", scrub: 1, immediateRender: false
         }})
 
         .to('.hero--container', {opacity: 0, xPercent: '100', ease: "power4.out",
@@ -544,7 +546,7 @@ async function setupViewer(){
         window.scrollTo({top: element?.getBoundingClientRect().top, left: 0, behavior: 'smooth'})
     })
 
-    document.querySelector('.hero--scroller')?.addEventListener('click', () => {
+    document.querySelector('.scroll-indicator')?.addEventListener('click', () => {
         const element = document.querySelector('.cam-view-2')
         window.scrollTo({top: element?.getBoundingClientRect().top, left: 0, behavior: 'smooth'})
     })
@@ -906,7 +908,7 @@ function initWhatsAppForms(){
             phoneInput && (phoneInput.value = normalizedPhone)
             const message = (formData.get('message') as string ?? '').trim()
             const payload = [
-                'Hello Perfect Solution, I have a furniture inquiry.',
+                'Hello Private Solutions, I have a furniture inquiry.',
                 name ? `Name: ${name}` : '',
                 normalizedPhone ? `Phone: ${normalizedPhone}` : '',
                 message ? `Message: ${message}` : ''
